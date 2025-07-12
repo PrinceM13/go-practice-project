@@ -1,5 +1,5 @@
 {
-  "Title": "hello world",
-  "Content": "my go project",
-  "CreatedAt": "2025-07-13T03:49:55.873487+07:00"
+  "title": "hello world",
+  "content": "test metadata",
+  "created_at": "2025-07-13T03:57:09.690941+07:00"
 }
