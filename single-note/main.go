@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/PrinceM13/go-practice-project/single-note/note"
 )
@@ -27,9 +30,17 @@ func getNoteData() (string, string) {
 }
 
 func getUserInput(prompt string) string {
-	fmt.Print(prompt)
-	var value string
-	fmt.Scanln(&value)
+	fmt.Printf("%v ", prompt)
 
-	return value
+	reader := bufio.NewReader(os.Stdin)
+	text, err := reader.ReadString('\n')
+
+	if err != nil {
+		return ""
+	}
+
+	text = strings.TrimSuffix(text, "\n") // Remove the newline character
+	text = strings.TrimSuffix(text, "\r") // Remove the carriage return character if present
+
+	return text
 }
