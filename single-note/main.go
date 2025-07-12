@@ -1,47 +1,35 @@
 package main
 
 import (
-	"errors"
 	"fmt"
+
+	"github.com/PrinceM13/go-practice-project/single-note/note"
 )
 
 func main() {
-	title, content, err := getNoteData()
+	title, content := getNoteData()
+
+	userNote, err := note.New(title, content)
 
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	fmt.Println("Your note = ", title, content)
+	fmt.Println("Note Created Successfully!", userNote)
 }
 
-func getNoteData() (string, string, error) {
-	title, err := getUserInput("Note Title:")
+func getNoteData() (string, string) {
+	title := getUserInput("Note Title:")
+	content := getUserInput("Note Content:")
 
-	if err != nil {
-		fmt.Println(err)
-		return "", "", err
-	}
-
-	content, err := getUserInput("Note Content:")
-
-	if err != nil {
-		fmt.Println(err)
-		return "", "", err
-	}
-
-	return title, content, nil
+	return title, content
 }
 
-func getUserInput(prompt string) (string, error) {
+func getUserInput(prompt string) string {
 	fmt.Print(prompt)
 	var value string
-	fmt.Scan(&value)
+	fmt.Scanln(&value)
 
-	if value == "" {
-		return "", errors.New("input cannot be empty")
-	}
-
-	return value, nil
+	return value
 }
