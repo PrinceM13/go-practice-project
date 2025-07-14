@@ -21,9 +21,12 @@ type outputtable interface {
 }
 
 func main() {
-	res := customcalculator.Add(1, 2)
-	// res := customcalculator.Add(1, 2) + 1 // This will not work because Add returns an interface{} type
-	fmt.Println("Result of addition:", res)
+	intRes := customcalculator.Add(1, 2) + 1
+	floatRes := customcalculator.Add(1.1, 2.2) + 0.5
+	stringRes := customcalculator.Add("Hello, ", "World!") + "!"
+	fmt.Println("Result of integer addition:", intRes)
+	fmt.Println("Result of float addition:", floatRes)
+	fmt.Println("Result of string concatenation:", stringRes)
 
 	printSomething(1)
 	printSomething(2.5)
