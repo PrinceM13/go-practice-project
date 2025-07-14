@@ -10,6 +10,10 @@ import (
 	"github.com/PrinceM13/go-practice-project/single-note/todo"
 )
 
+type saver interface {
+	Save() error
+}
+
 func main() {
 	title, content := getNoteData()
 
@@ -21,14 +25,10 @@ func main() {
 	}
 
 	userNote.Display()
-	err = userNote.Save()
-
+	err = saveData(userNote)
 	if err != nil {
-		fmt.Println("Error saving note:", err)
 		return
 	}
-
-	fmt.Println("Note saved successfully!")
 
 	todoText := getUserInput("Todo Text:")
 
@@ -39,13 +39,23 @@ func main() {
 	}
 
 	todo.Display()
-	err = todo.Save()
-
+	err = saveData(todo)
 	if err != nil {
-		fmt.Println("Error saving todo:", err)
 		return
 	}
-	fmt.Println("Todo saved successfully!")
+}
+
+func saveData(data saver) error {
+	err := data.Save()
+
+	if err != nil {
+		fmt.Println("Error saving note:", err)
+		return err
+	}
+
+	fmt.Println("Note saved successfully!")
+
+	return nil
 }
 
 func getNoteData() (string, string) {
