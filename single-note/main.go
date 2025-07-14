@@ -38,6 +38,8 @@ func main() {
 		return
 	}
 
+	printSomething(todo)
+
 	err = outputData(userNote)
 	if err != nil {
 		return
@@ -51,7 +53,16 @@ func main() {
 
 // any type is an alias for interface{}
 func printSomething(value interface{}) {
-	fmt.Println(value)
+	switch v := value.(type) {
+	case int:
+		fmt.Println("Integer value:", v)
+	case float64:
+		fmt.Println("Float value:", v)
+	case string:
+		fmt.Println("String value:", v)
+	default:
+		fmt.Println("Unknown type:", v)
+	}
 }
 
 func outputData(data outputtable) error {
