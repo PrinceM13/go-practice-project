@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/PrinceM13/go-practice-project/single-note/note"
+	"github.com/PrinceM13/go-practice-project/single-note/todo"
 )
 
 func main() {
@@ -28,6 +29,23 @@ func main() {
 	}
 
 	fmt.Println("Note saved successfully!")
+
+	todoText := getUserInput("Todo Text:")
+
+	todo, err := todo.New(todoText)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	todo.Display()
+	err = todo.Save()
+
+	if err != nil {
+		fmt.Println("Error saving todo:", err)
+		return
+	}
+	fmt.Println("Todo saved successfully!")
 }
 
 func getNoteData() (string, string) {
