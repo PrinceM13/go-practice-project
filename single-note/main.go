@@ -53,16 +53,36 @@ func main() {
 
 // any type is an alias for interface{}
 func printSomething(value interface{}) {
-	switch v := value.(type) {
-	case int:
-		fmt.Println("Integer value:", v)
-	case float64:
-		fmt.Println("Float value:", v)
-	case string:
-		fmt.Println("String value:", v)
-	default:
-		fmt.Println("Unknown type:", v)
+	intVal, ok := value.(int)
+	if ok {
+		fmt.Println("Integer value:", intVal)
+		return
 	}
+
+	floatVal, ok := value.(float64)
+	if ok {
+		fmt.Println("Float value:", floatVal)
+		return
+	}
+
+	strVal, ok := value.(string)
+	if ok {
+		fmt.Println("String value:", strVal)
+		return
+	}
+
+	fmt.Println("Unknown type:", value)
+
+	// switch v := value.(type) {
+	// case int:
+	// 	fmt.Println("Integer value:", v)
+	// case float64:
+	// 	fmt.Println("Float value:", v)
+	// case string:
+	// 	fmt.Println("String value:", v)
+	// default:
+	// 	fmt.Println("Unknown type:", v)
+	// }
 }
 
 func outputData(data outputtable) error {
