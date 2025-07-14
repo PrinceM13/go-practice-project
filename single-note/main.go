@@ -20,6 +20,10 @@ type outputtable interface {
 }
 
 func main() {
+	printSomething(1)
+	printSomething(2.5)
+	printSomething("Hello, World!")
+
 	title, content := getNoteData()
 	userNote, err := note.New(title, content)
 	if err != nil {
@@ -43,6 +47,11 @@ func main() {
 	if err != nil {
 		return
 	}
+}
+
+// any type is an alias for interface{}
+func printSomething(value interface{}) {
+	fmt.Println(value)
 }
 
 func outputData(data outputtable) error {
