@@ -6,9 +6,9 @@ import (
 	"os"
 	"strings"
 
-	custom_calculator "github.com/PrinceM13/go-practice-project/single-note/add"
-	"github.com/PrinceM13/go-practice-project/single-note/note"
-	"github.com/PrinceM13/go-practice-project/single-note/todo"
+	"github.com/PrinceM13/go-practice-project/singlenote/customcalculator"
+	"github.com/PrinceM13/go-practice-project/singlenote/note"
+	"github.com/PrinceM13/go-practice-project/singlenote/todo"
 )
 
 type saver interface {
@@ -21,6 +21,10 @@ type outputtable interface {
 }
 
 func main() {
+	res := customcalculator.Add(1, 2)
+	// res := customcalculator.Add(1, 2) + 1 // This will not work because Add returns an interface{} type
+	fmt.Println("Result of addition:", res)
+
 	printSomething(1)
 	printSomething(2.5)
 	printSomething("Hello, World!")
@@ -54,9 +58,6 @@ func main() {
 
 // any type is an alias for interface{}
 func printSomething(value interface{}) {
-	res := custom_calculator.Add(1, 2) + 1
-	fmt.Println("Result of addition:", res)
-
 	intVal, ok := value.(int)
 	if ok {
 		fmt.Println("Integer value:", intVal)
